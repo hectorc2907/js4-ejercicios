@@ -82,3 +82,70 @@ function ejercicio2() {
 }
 let punto2 = document.getElementById("btnPunto2");
 punto2.addEventListener("click", ejercicio2);
+
+function ejercicio3() {
+  let mPerimetro = document.getElementById("mensajePerimetro");
+  let mArea = document.getElementById("mensajeArea");
+  class Rectangulo {
+    constructor(alto, ancho) {
+      this.alto = alto;
+      this.ancho = ancho;
+    }
+    set cambiarAltura(nuevaAltura) {
+      this.alto = nuevaAltura;
+    }
+    set cambiarAncho(nuevoAncho) {
+      this.ancho = nuevoAncho;
+    }
+    get altoRectangulo() {
+      return this.alto;
+    }
+    get anchoRectangulo() {
+      return this.ancho;
+    }
+    get area() {
+      return this.alto * this.ancho;
+    }
+    get perimetro() {
+      return 2 * (this.alto + this.ancho);
+    }
+    detalle() {
+      return `<p>El rectangulo tiene una altura de ${this.altoRectangulo} cm y un ancho de ${this.anchoRectangulo} cm</p>`;
+    }
+  }
+  let alto = parseInt(prompt("Ingrese el Valor del alto"));
+  let ancho = parseInt(prompt("Ingrese el Valor del ancho"));
+  let rectangulo = new Rectangulo(alto, ancho);
+  mPerimetro.innerHTML = `${rectangulo.detalle()} dan como resultado un perimetro de ${
+    rectangulo.perimetro
+  }`;
+  mArea.innerHTML = `${rectangulo.detalle()} dan como resultado un area de ${
+    rectangulo.area
+  }`;
+  let btnAltoNuevo = document.getElementById("btnAltoNuevo");
+  btnAltoNuevo.addEventListener("click", function () {
+    let nuevoAlto = parseInt(
+      prompt("Ingrese el alto nuevo que desea utilizar")
+    );
+    rectangulo.cambiarAltura = nuevoAlto;
+    actualizarResultados();
+  });
+  let btnAnchoNuevo = document.getElementById("btnAnchoNuevo");
+  btnAnchoNuevo.addEventListener("click", function () {
+    let nuevoAncho = parseInt(
+      prompt("Ingrese el ancho nuevo que desea utilizar")
+    );
+    rectangulo.cambiarAncho = nuevoAncho;
+    actualizarResultados();
+  });
+  function actualizarResultados() {
+    mPerimetro.innerHTML = `${rectangulo.detalle()} dan como resultado un perimetro de ${
+      rectangulo.perimetro
+    }`;
+    mArea.innerHTML = `${rectangulo.detalle()} dan como resultado un area de ${
+      rectangulo.area
+    }`;
+  }
+}
+let punto3 = document.getElementById("btnPunto3");
+punto3.addEventListener("click", ejercicio3);
