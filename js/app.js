@@ -184,3 +184,84 @@ function ejercicio4() {
 }
 let punto4 = document.getElementById("btnPunto4");
 punto4.addEventListener("click", ejercicio4);
+
+function ejercicio5() {
+  class Persona {
+    constructor(nombre, edad, sexo, peso, altura, nacimiento) {
+      this._nombre = nombre;
+      this._edad = edad;
+      this._dni = this.generarDNI();
+      this._sexo = sexo;
+      this._peso = peso;
+      this._altura = altura;
+      this._nacimiento = nacimiento;
+    }
+    mostrarGeneracion() {
+      if (this._nacimiento >= 1930 && this._nacimiento <= 1948) {
+        return `<p>Perteneces a la Generacion Silenciosa y tu rasgo caracteristico es la Austeridad</p>`;
+      } else if (this._nacimiento >= 1949 && this._nacimiento <= 1968) {
+        return `<p>Perteneces a la Generacion Baby Boom y tu rasgo caracteristico es la Ambición</p>`;
+      } else if (this._nacimiento >= 1969 && this._nacimiento <= 1980) {
+        return `<p>Perteneces a la Generacion X y tu rasgo caracteristico es la Obsesión por el éxito</p>`;
+      } else if (this._nacimiento >= 1981 && this._nacimiento <= 1993) {
+        return `<p>Perteneces a la Generacion Y(Millennials) y tu rasgo caracteristico es la Frustración</p>`;
+      } else if (this._nacimiento >= 1994 && this._nacimiento <= 2010) {
+        return `<p>Perteneces a la Generacion Z y tu rasgo caracteristico es la Irreverencia</p>`;
+      } else {
+        return `<p>Generacion no especifica sin rasgo caracteristico</p>`;
+      }
+    }
+    esMayorDeEdad() {
+      if (this._edad >= 18) {
+        return `<p>El usuario tiene ${this._edad} y es mayor de edad</p>`;
+      } else {
+        return `<p>El usuario tiene ${this._edad} y es menor de edad</p>`;
+      }
+    }
+    mostrarDatos() {
+      return `<ul>
+                <li>Nombre: ${this._nombre}</li>
+                <li>Edad: ${this._edad}</li>
+                <li>DNI: ${this._dni}</li>
+                <li>Genero: ${this._sexo}</li>
+                <li>Peso: ${this._peso}KG</li>
+                <li>Altura: ${this._altura}CM</li>
+                <li>Año de Nacimiento: ${this._nacimiento}</li>
+              </ul>`;
+    }
+    generarDNI() {
+      return parseInt(Math.random() * 99999999);
+    }
+  }
+  let mensajePersona = document.getElementById("mensajePersona");
+  let btnIngresarDatos = document.getElementById("btnIngresarDatos");
+  btnIngresarDatos.addEventListener("click", function () {
+    let nombre = prompt("Ingrese el nombre:") || "No Especifico Datos";
+    let edad = parseInt(prompt("Ingrese la edad:")) || "No Especifico Datos";
+    let genero =
+      prompt("Ingrese el sexo M = Masculino, F = Femenino") ||
+      "No Especifico Datos";
+    if (genero == "M") {
+      genero = "Masculino";
+    } else if (genero == "F") {
+      genero = "Femenino";
+    } else {
+      genero = "Sin Genero";
+    }
+    let peso =
+      parseInt(prompt("Ingrese el peso en kg:")) || "No Especifico Datos";
+    let altura =
+      parseInt(prompt("Ingrese la altura en cm:")) || "No Especifico Datos";
+    let nacimiento =
+      parseInt(prompt("Ingrese el año de nacimiento: ")) ||
+      "No Especifico Datos";
+    let individuo = new Persona(nombre, edad, genero, peso, altura, nacimiento);
+    mensajePersona.innerHTML = "";
+    mensajePersona.innerHTML +=
+      individuo.mostrarDatos() +
+      individuo.mostrarGeneracion() +
+      individuo.esMayorDeEdad();
+  });
+}
+let punto5 = document.getElementById("btnPunto5");
+punto5.addEventListener("click", ejercicio5);
