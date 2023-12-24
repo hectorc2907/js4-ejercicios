@@ -149,3 +149,38 @@ function ejercicio3() {
 }
 let punto3 = document.getElementById("btnPunto3");
 punto3.addEventListener("click", ejercicio3);
+
+function ejercicio4() {
+  let productos = [];
+  class Producto {
+    constructor(codigo, nombre, precio) {
+      this._codigo = codigo;
+      this._nombre = nombre;
+      this._precio = precio;
+    }
+    mostrarDetalles() {
+      return `<ul>
+                <li>Codigo = ${this._codigo}</li>
+                <li>Nombre = ${this._nombre}</li>
+                <li>Precio = ${this._precio}</li>
+              </ul>`;
+    }
+  }
+  let mensajeProductos = document.getElementById("mensajeProductos");
+  let btnAgregarDatos = document.getElementById("btnAgregarDatos");
+  btnAgregarDatos.addEventListener("click", function (e) {
+    e.preventDefault();
+    let codigo = parseInt(prompt("Ingrese el Codigo numerico:")) || 0;
+    let nombre = prompt("Ingrese el Nombre del producto:") || "Sin Nombre";
+    let precio = parseInt(prompt("Ingrese el Precio:")) || 0;
+    let nuevoProducto = new Producto(codigo, nombre, precio);
+    productos.push(nuevoProducto);
+    console.log(productos);
+    mensajeProductos.innerHTML = "";
+    productos.forEach((producto) => {
+      mensajeProductos.innerHTML += producto.mostrarDetalles() + "<br>";
+    });
+  });
+}
+let punto4 = document.getElementById("btnPunto4");
+punto4.addEventListener("click", ejercicio4);
