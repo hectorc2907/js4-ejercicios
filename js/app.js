@@ -175,7 +175,6 @@ function ejercicio4() {
     let precio = parseInt(prompt("Ingrese el Precio:")) || 0;
     let nuevoProducto = new Producto(codigo, nombre, precio);
     productos.push(nuevoProducto);
-    console.log(productos);
     mensajeProductos.innerHTML = "";
     productos.forEach((producto) => {
       mensajeProductos.innerHTML += producto.mostrarDetalles() + "<br>";
@@ -265,3 +264,80 @@ function ejercicio5() {
 }
 let punto5 = document.getElementById("btnPunto5");
 punto5.addEventListener("click", ejercicio5);
+
+function ejercicio6() {
+  class Libro {
+    constructor(isbm, nombre, autor, paginas) {
+      this._isbm = isbm;
+      this._nombre = nombre;
+      this._autor = autor;
+      this._paginas = paginas;
+    }
+    get obtenerIsbm() {
+      return this._isbm;
+    }
+    get obtenerNombre() {
+      return this._nombre;
+    }
+    get obtenerAutor() {
+      return this._autor;
+    }
+    get obtenerPaginas() {
+      return this._paginas;
+    }
+    set cambiarIsbm(isbmNuevo) {
+      this._isbm = isbmNuevo;
+    }
+    set cambiarNombre(nombreNuevo) {
+      this._nombre = nombreNuevo;
+    }
+    set cambiarAutor(autorNuevo) {
+      this._autor = autorNuevo;
+    }
+    set cambiarPaginas(paginasNuevo) {
+      this._paginas = paginasNuevo;
+    }
+    mostrarLibro() {
+      return `El libro ${this._nombre} con ISBN ${this._isbm} creado por el autor ${this._autor} tiene ${this._paginas} paginas`;
+    }
+  }
+  let libros = [];
+  let mensajeLibro = document.getElementById("mensajeLibro");
+  let btnIngresarLibro = document.getElementById("btnIngresarLibro");
+  btnIngresarLibro.addEventListener("click", function () {
+    let isbm =
+      prompt("Ingrese el isbm del libro:") ||
+      "No se ingreso isbm para este libro";
+    let nombre =
+      prompt("Ingrese el nombre del libro:") ||
+      "No se ingreso nombre para este libro";
+    let autor =
+      prompt("Ingrese el autor del libro:") ||
+      "No se ingreso autor para este libro";
+    let paginas =
+      parseInt(prompt("Ingrese la cantidad de paginas de este libro:")) || 0;
+    let libro = new Libro(isbm, nombre, autor, paginas);
+    libros.push(libro);
+    mensajeLibro.innerHTML = "";
+    libros.forEach((libro) => {
+      mensajeLibro.innerHTML += libro.mostrarLibro() + "<br>";
+    });
+    if (libros.length <= 1) {
+      mensajeLibro.innerHTML += `El libro con mas paginas es de la posicion ${libros.length}`;
+    } else {
+      let nPaginas = 0;
+      let posicion = 0;
+      for (let i = 0; i < libros.length; i++) {
+        if (nPaginas < libros[i].obtenerPaginas) {
+          posicion = i;
+          nPaginas = libros[i].obtenerPaginas;
+        }
+      }
+      mensajeLibro.innerHTML += `El libro con mas paginas esta en la posicion numero ${
+        posicion + 1
+      }`;
+    }
+  });
+}
+let punto6 = document.getElementById("btnPunto6");
+punto6.addEventListener("click", ejercicio6);
