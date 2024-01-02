@@ -341,3 +341,132 @@ function ejercicio6() {
 }
 let punto6 = document.getElementById("btnPunto6");
 punto6.addEventListener("click", ejercicio6);
+
+function ejercicio7() {
+  class Numero {
+    constructor(nombre, telefono) {
+      this._nombre = nombre;
+      this._telefono = telefono;
+    }
+    get agendaNombre() {
+      return this._nombre;
+    }
+    get agendaTelefono() {
+      return this._telefono;
+    }
+  }
+  let agenda = [];
+  let respuestaAgenda = document.getElementById("respuestaAgenda");
+  let btnAgregarContacto = document.getElementById("btnAgregarContacto");
+  btnAgregarContacto.addEventListener("click", function () {
+    if (agenda.length == 10) {
+      respuestaAgenda.innerHTML = "";
+      respuestaAgenda.innerHTML = `La agenda ya esta llena`;
+    } else {
+      let nombre = prompt("Ingrese el nombre del usuario:") || "Desconocido";
+      let numero =
+        parseInt(prompt("Ingrese el numero del usuario:")) || "Desconocido";
+      while (isNaN(numero) || numero <= 0 || numero > 9999999999) {
+        numero =
+          parseInt(
+            prompt("Ingrese el numero del usuario debe ser de 1 a 10 numeros:")
+          ) || "Desconocido";
+      }
+      let nombreExistente = false;
+      for (let i = 0; i < agenda.length; i++) {
+        if (agenda[i] && agenda[i].agendaNombre === nombre) {
+          nombreExistente = true;
+          break;
+        }
+      }
+      if (nombreExistente) {
+        respuestaAgenda.innerHTML = `El nombre ${nombre} ya está en la agenda`;
+      } else {
+        let contacto = new Numero(nombre, numero);
+        agenda.push(contacto);
+        respuestaAgenda.innerHTML = "";
+        respuestaAgenda.innerHTML = `El numero ${numero} de ${nombre} fue agendado con exito!`;
+      }
+    }
+  });
+  let btnExisteContacto = document.getElementById("btnExisteContacto");
+  btnExisteContacto.addEventListener("click", function () {
+    let nombre = prompt("Ingrese el nombre del usuario:") || "Desconocido";
+    let nombreExistente = false;
+    for (let i = 0; i < agenda.length; i++) {
+      if (agenda[i] && agenda[i].agendaNombre === nombre) {
+        nombreExistente = true;
+        break;
+      }
+    }
+    if (nombreExistente) {
+      respuestaAgenda.innerHTML = `El nombre ${nombre} ya está en la agenda`;
+    } else {
+      respuestaAgenda.innerHTML = `El nombre ${nombre} no está en la agenda`;
+    }
+  });
+  let btnMostrarContactos = document.getElementById("btnMostrarContactos");
+  btnMostrarContactos.addEventListener("click", function () {
+    if (agenda.length == 0) {
+      respuestaAgenda.innerHTML = `Agenda Vacia`;
+    } else {
+      respuestaAgenda.innerHTML = `<ul>`;
+      for (let i = 0; i < agenda.length; i++) {
+        respuestaAgenda.innerHTML += `<li>${agenda[i].agendaNombre} - ${agenda[i].agendaTelefono}</li>`;
+      }
+      respuestaAgenda.innerHTML += `</ul>`;
+    }
+  });
+  let btnBuscarContacto = document.getElementById("btnBuscarContacto");
+  btnBuscarContacto.addEventListener("click", function () {
+    let nombre = prompt("Ingrese el nombre del usuario:") || "Desconocido";
+    let nombreExistente = false;
+    let posicion = 0;
+    for (let i = 0; i < agenda.length; i++) {
+      if (agenda[i] && agenda[i].agendaNombre === nombre) {
+        nombreExistente = true;
+        posicion = i + 1;
+        break;
+      }
+    }
+    if (nombreExistente) {
+      respuestaAgenda.innerHTML = `El contacto esta en la posicion ${posicion}`;
+    } else {
+      respuestaAgenda.innerHTML = `El contacto no esta en la agenda`;
+    }
+  });
+  let btnEliminarContacto = document.getElementById("btnEliminarContacto");
+  btnEliminarContacto.addEventListener("click", function () {
+    let nombreEliminar = prompt("Ingrese el nombre del contacto a eliminar:");
+
+    let indiceEliminar = -1;
+    for (let i = 0; i < agenda.length; i++) {
+      if (agenda[i].nombre === nombreEliminar) {
+        indiceEliminar = i;
+        break;
+      }
+    }
+    if (indiceEliminar !== -1) {
+      agenda.splice(indiceEliminar, 1);
+      respuestaAgenda.innerHTML = `El contacto con nombre ${nombreEliminar} se Elimino Correctamente`;
+    } else {
+      respuestaAgenda.innerHTML = `El contacto con nombre ${nombreEliminar} NO se Elimino Correctamente`;
+    }
+  });
+  let btnAgendaMensaje = document.getElementById("btnAgendaMensaje");
+  btnAgendaMensaje.addEventListener("click", function () {
+    if (agenda.length < 10) {
+      respuestaAgenda.innerHTML = `Actualmente tienes ${
+        agenda.length
+      } contactos, tienes ${10 - agenda.length} disponible`;
+    }
+  });
+  let btnHuecosLibres = document.getElementById("btnHuecosLibres");
+  btnHuecosLibres.addEventListener("click", function () {
+    if (agenda.length < 10) {
+      respuestaAgenda.innerHTML = `Tienes ${10 - agenda.length} disponible`;
+    }
+  });
+}
+let punto7 = document.getElementById("btnPunto7");
+punto7.addEventListener("click", ejercicio7);
